@@ -1,0 +1,259 @@
+#+TITLE: PomoTask
+
+* Goals
+The goal of this project is to make a basic productivity timer and a
+basic task manager to remind myself of the the current task at hand.
+
+* HTML
+:PROPERTIES:
+:header-args:html: :tangle ~/code/projects/pomotask/index.html
+:END:
+
+#+begin_src html
+  <!DOCTYPE html>
+  <html>
+    <!-- The goal of this project is to make a basic productivity timer and a
+         basic task manager to remind myself of the the current task at hand. -->
+    <head>
+      <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+      <meta content="utf-8" http-equiv="encoding">
+      <title>
+        Dashboard
+      </title>
+      <link rel="stylesheet" type="text/css" href="style.css">
+    </head>
+    <body>
+      <div class="timer-name">
+        <h2 class="headline" id="tname"></h2>
+      </div>
+      <div class="timer">
+        <div class="countdown">
+          <p class="watch" id="min"></p>
+          <p class="watch" id="sec"></p>
+          <p id="end"></p>
+        </div>
+      </div> 
+        <p class="buttons" id="pick">
+          <button class="button" onClick="setTimer((60*25*1000), 'Pomodoro')">Pomodoro</button>
+          <button class="button" onClick="setTimer((60*5*1000), 'Short break')">Short break</button>
+          <button class="button" onClick="setTimer((60*20*1000), 'Long break')">Long break</button>
+        </p>
+      <bl>
+      <div class="task">
+        <h2 class="headline" id="now_doing">
+        </h2>
+        <br>
+        <div class="input">
+          <form>
+            <label for="current_task">
+              Task:
+            </label>
+            <input type="text" input id="current_task" />
+            <input class="button" type="submit" value="Set task" onclick="myTask()">
+          </form>
+        </div>
+        <br>
+      </div>
+    </body>
+    <script src="script.js"></script>
+  </html>
+#+end_src
+
+* CSS
+:PROPERTIES:
+:header-args:css: :tangle ~/code/projects/pomotask/style.css
+:END:
+
+This is kind of a mess, but it works for now.
+
+#+begin_src css
+  body {
+      color: #dcdccc;
+      background-color: #3f3f3f;
+      font-family: Georgia, serif;
+      width: 100%;
+  }
+  
+  h2#now_doing {
+      color: #80d4aa;
+  }
+  
+  input[type=text] {
+      width: 20%;
+      border: 2px solid #262626;
+      background-color: #c3bf9f;
+      color: #2e3330;
+  }
+  
+  label {
+      color: #dfdfbf;
+  }
+  
+  
+  p.watch {
+      display: inline;
+      font-size: 40px;
+      margin-top: 0px;
+  }
+  
+  .button {
+      background: #2f2f2f;
+      color: #ffd7a7;
+      border: none;
+  }
+  
+  .buttons {
+      text-align: center;
+  }
+  
+  .countdown {
+      display: inline-block;
+      padding: 15px;
+      background: #464646;
+  }
+  
+  .headline {
+      font-family: 'Century Gothic', sans-serif;
+      text-align: center;
+      padding: 40px;
+  }
+  
+  .headline#now_doing {
+      padding: 15px;
+      background: #464646;
+      max-width: 90%;
+      width: 26%;
+      margin: auto;
+  }
+  
+  .input {
+      text-align: center;
+  }
+  
+  .timer {
+      color: #f0dfaf;
+      font-family: 'Lucida Console', Monaco, monospace;
+      text-align: center;
+  }
+  
+  .timer > #end {
+      margin-left: auto;
+      margin-right: auto;
+  }
+  
+  .timer-name {
+      color: #ffcfaf;
+  }
+  
+  
+  
+#+end_src
+
+* JavaScript
+:PROPERTIES:
+:header-args:javascript: :tangle ~/code/projects/pomotask/script.js
+:END:
+
+Set all my constants.
+Need to go through and delete constants that aren't being used.
+
+#+begin_src javascript
+  const pomo = (60 * 25 * 1000);
+  const shortbreak = (60 * 5 * 1000);
+  const longbreak = (60 * 20 * 1000);
+  const week = (7*24*60*60*1000);
+  const hrs = (60 * 60 * 1000);
+  const mins = (60 * 1000);
+  const secs = 1000;
+  
+  
+  var start;
+  var timer_set = Date.parse(getCookie("target"));
+   #+end_src
+   
+ Ok, here's what I did. Each button sets a cookie with the target
+ timer value and the name. The timer counts down to the cookie target
+ and displays the pomodoro status (pomodoro, short break, long break).
+  
+  #+begin_src javascript
+    function setTimer(value,str) {
+        const d = new Date();
+        const t = new Date();
+        d.setTime(d.getTime() + week);
+        t.setTime(t.getTime() + value);
+        let expires = "expires=" + d.toUTCString();
+        let timer_target = "target=" + t.toUTCString();
+        let timer_name = "name=" + str;
+        document.cookie = timer_target + ";" + getCookie("task") + ";" + expires + ";path=/;SameSIte=Lax";
+        document.cookie = timer_name + ";" + getCookie("task") + ";" + expires + ";path=/;SameSIte=Lax";
+        location.reload();
+    }
+    
+    function refresh() {
+        location.reload();
+    }
+    
+    let x = setInterval(function(){
+        var format = (t) => {
+            return t < 10 ? '0' + t : t;
+        };
+        var now = new Date().getTime();
+        let timeleft = timer_set - now
+        let minutes = Math.floor((timeleft % (1000 * 60 * 60)) / (1000 * 60));
+        let seconds = Math.floor((timeleft % (1000 * 60)) / 1000);  
+        document.getElementById("tname").innerHTML = getCookie("name");
+        document.getElementById("min").innerHTML = format(minutes) + ":";
+        document.getElementById("sec").innerHTML = format(seconds);
+        if (timeleft < 0) {
+            var alert = new Audio('alert.mp3');
+            clearInterval(x);
+            alert.play();
+            document.getElementById("min").innerHTML = ""
+            document.getElementById("sec").innerHTML = ""
+            document.getElementById("end").innerHTML = "Time's up!"
+        }
+    }, 1000);
+  #+end_src
+  
+Very happy with the functionality here. Grabs the form input and
+saves it in a cookie. Checks for an existing cookie and inserts the
+contents of the task into the page.
+  
+  #+begin_src javascript
+  var doing = '';
+  
+  function myTask() {
+      const d = new Date();
+      d.setTime(d.getTime() + week);
+      let expires = "expires="+ d.toUTCString();
+      let task = document.getElementById('current_task').value;
+      document.cookie = "task=" + task + ";" + expires + ";path=/;SameSite=Lax";
+  }
+  
+  function getCookie(cname) {
+      let name = cname + "=";
+      let decodedCookie = document.cookie;
+      let ca = decodedCookie.split(';');
+      for(let i = 0; i < ca.length; i++) {
+          let c = ca[i];
+          while (c.charAt(0) == ' ') {
+              c = c.substring(1);
+          }
+          if (c.indexOf(name) == 0) {
+              return c.substring(name.length, c.length);
+          }
+      }
+      return "";
+  }
+  
+  function onLoad() {
+      doing = getCookie("task");
+      if (doing !== "") {
+          document.getElementById("now_doing").innerHTML = getCookie("task");
+      } else {
+          return "";
+      }
+  }
+  
+  onLoad();
+#+end_src

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <!-- The goal of this project is to make a basic productivity timer and a
+       basic task manager to remind myself of the the current task at hand. -->
+  <head>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta content="utf-8" http-equiv="encoding">
+    <title>
+      Dashboard
+    </title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+  </head>
+  <body>
+    <div class="timer-name">
+      <h2 class="headline" id="tname"></h2>
+    </div>
+    <div class="timer">
+      <div class="countdown">
+        <p class="watch" id="min"></p>
+        <p class="watch" id="sec"></p>
+        <p id="end"></p>
+      </div>
+    </div> 
+      <p class="buttons" id="pick">
+        <button class="button" onClick="setTimer((60*25*1000), 'Pomodoro')">Pomodoro</button>
+        <button class="button" onClick="setTimer((60*5*1000), 'Short break')">Short break</button>
+        <button class="button" onClick="setTimer((60*20*1000), 'Long break')">Long break</button>
+      </p>
+    <bl>
+    <div class="task">
+      <h2 class="headline" id="now_doing">
+      </h2>
+      <br>
+      <div class="input">
+        <form>
+          <label for="current_task">
+            Task:
+          </label>
+          <input type="text" input id="current_task" />
+          <input class="button" type="submit" value="Set task" onclick="myTask()">
+        </form>
+      </div>
+      <br>
+    </div>
+  </body>
+  <script src="script.js"></script>
+</html>
