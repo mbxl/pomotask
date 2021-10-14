@@ -6,7 +6,7 @@ basic task manager to remind myself of the the current task at hand.
 
 * HTML
 :PROPERTIES:
-:header-args:html: :tangle ~/code/projects/pomotask/index.html
+:header-args:html: :tangle ./index.html
 :END:
 
 #+begin_src html
@@ -54,6 +54,28 @@ basic task manager to remind myself of the the current task at hand.
         </div>
         <br>
       </div>
+      <p>
+        Welcome to PomoTask!       </p>
+      <p>
+        Click "Pomodoro" to start a 25 minute timer.
+      </p>
+      <p>
+        Click "Short break" to start a 5 minute timer.
+      </p>
+      <p>
+        Click "Long break" to start a 20 minute timer.
+      </p>
+      <p>
+        Type the task you intend to do during your Pomodoro session into the text box and click "Set task" to put that task in big letters right below the timer.
+      </p>
+      <p>
+        This is a basic utility that I made to keep myself on
+        track. When I have used the pomodoro technique in the past, I
+        found myself quickly getting distracted from the task I
+        originally set out to do, remembering the original task only
+        when the timer goes off. So I made this simple tool that acts as
+        a basic pomodoro timer and task manager.
+      </p>
     </body>
     <script src="script.js"></script>
   </html>
@@ -61,7 +83,7 @@ basic task manager to remind myself of the the current task at hand.
 
 * CSS
 :PROPERTIES:
-:header-args:css: :tangle ~/code/projects/pomotask/style.css
+:header-args:css: :tangle ./style.css
 :END:
 
 This is kind of a mess, but it works for now.
@@ -71,7 +93,8 @@ This is kind of a mess, but it works for now.
       color: #dcdccc;
       background-color: #3f3f3f;
       font-family: Georgia, serif;
-      width: 100%;
+      width: 60%;
+      margin: 0 auto;
   }
   
   h2#now_doing {
@@ -79,7 +102,7 @@ This is kind of a mess, but it works for now.
   }
   
   input[type=text] {
-      width: 20%;
+      width: 30%;
       border: 2px solid #262626;
       background-color: #c3bf9f;
       color: #2e3330;
@@ -122,7 +145,7 @@ This is kind of a mess, but it works for now.
       padding: 15px;
       background: #464646;
       max-width: 90%;
-      width: 26%;
+      width: 30%;
       margin: auto;
   }
   
@@ -151,7 +174,7 @@ This is kind of a mess, but it works for now.
 
 * JavaScript
 :PROPERTIES:
-:header-args:javascript: :tangle ~/code/projects/pomotask/script.js
+:header-args:javascript: :tangle ./script.js
 :END:
 
 Set all my constants.
