@@ -131,6 +131,11 @@ h2.headline {
     text-align:center;
 }
 
+h2.headline#now_doing {
+    padding: 15px;
+    background: #464646;
+}
+
 h3 {
   font-size: calc(var(--base-fontsize) * var(--header-scale) * var(--header-scale));
   margin-top: calc(var(--line-height) * 1.5rem);
@@ -155,7 +160,8 @@ h6 {
 p.watch {
     display: inline;
     font-size: 40px;
-    margin-top: 0px;
+    margin-top: auto;
+    margin-bottom: auto;
 }
 
 p.buttons {
@@ -169,6 +175,10 @@ div.timer {
 
 div.input {
     text-align: center;
+}
+div.countdown {
+    padding: 15px;
+    background: #464646;
 }
 
 /* Format links & buttons */
