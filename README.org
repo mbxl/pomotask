@@ -18,18 +18,18 @@ basic task manager to remind myself of the the current task at hand.
       <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
       <meta content="utf-8" http-equiv="encoding">
       <title>
-        Dashboard
+        PomoTask
       </title>
       <link rel="stylesheet" type="text/css" href="style.css">
     </head>
     <body>
       <div class="timer-name">
-        <h2 class="headline" id="tname">Pomodoro</h2>
+        <h2 class="headline" id="tname">PomoTask</h2>
       </div>
       <div class="timer">
         <div class="countdown">
-          <p class="watch" id="min"></p>
-          <p class="watch" id="sec"></p>
+          <p class="watch" id="min">Welcome to </p>
+          <p class="watch" id="sec">PomoTask!</p>
           <p id="end"></p>
         </div>
       </div> 
@@ -706,7 +706,8 @@ contents of the task into the page.
 
 * Todos
 ** Active
-*** TODO Get rid of NaN letters that appear in the timer box when a user doesn't already have a cookie
 ** Done
 *** DONE Replace CSS with customized SimpleCSS template
 CLOSED: [2021-10-14 Thu 16:30]
+*** DONE Get rid of NaN letters that appear in the timer box when a user doesn't already have a cookie
+CLOSED: [2021-10-14 Thu 16:36]
