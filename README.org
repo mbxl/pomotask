@@ -4,6 +4,9 @@
 The goal of this project is to make a basic productivity timer and a
 basic task manager to remind myself of the the current task at hand.
 
+* Todos
+** TODO Replace CSS with customized SimpleCSS template
+** TODO Get rid of NaN letters that appear in the timer box when a user doesn't already have a cookie
 * HTML
 :PROPERTIES:
 :header-args:html: :tangle ./index.html
