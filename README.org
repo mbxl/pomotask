@@ -657,6 +657,10 @@ Need to go through and delete constants that aren't being used.
             document.getElementById("min").innerHTML = ""
             document.getElementById("sec").innerHTML = ""
             document.getElementById("end").innerHTML = "Time's up!"
+        } elif (timeleft == Null) {
+            document.getElementById("min").innerHTML = ""
+            document.getElementById("sec").innerHTML = ""
+            document.getElementById("end").innerHTML = "Welcome to PomoTask!"
         }
     }, 1000);
   #+end_src

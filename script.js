@@ -45,6 +45,10 @@ let x = setInterval(function(){
         document.getElementById("min").innerHTML = ""
         document.getElementById("sec").innerHTML = ""
         document.getElementById("end").innerHTML = "Time's up!"
+    } elif (timeleft == Null) {
+        document.getElementById("min").innerHTML = ""
+        document.getElementById("sec").innerHTML = ""
+        document.getElementById("end").innerHTML = "Welcome to PomoTask!"
     }
 }, 1000);
 
